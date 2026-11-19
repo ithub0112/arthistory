@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>藝術史學習地圖</title>
+<style>
+:root{--bg:#f6f1e7;--card:#fffdf8;--ink:#2b2622;--mute:#7a7066;--line:#ddd2bf;--acc:#9c3d2e;--acc2:#e9d9c0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1a17;--card:#27231f;--ink:#efe7da;--mute:#a79c8d;--line:#3d362f;--acc:#e08a6f;--acc2:#3a2f27;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1d1a17;--card:#27231f;--ink:#efe7da;--mute:#a79c8d;--line:#3d362f;--acc:#e08a6f;--acc2:#3a2f27;color-scheme:dark}
+html{scroll-padding-top:70px}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Serif TC","Songti TC",serif;line-height:1.75}
+header{padding:28px 18px 8px;max-width:760px;margin:auto}
+h1{margin:0;font-size:1.7rem;letter-spacing:.08em}.sub{color:var(--mute);font-size:.9rem}
+.bar{height:8px;background:var(--acc2);border-radius:9px;margin:12px 0 4px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;gap:8px;overflow-x:auto;padding:10px 18px;border-bottom:1px solid var(--line);max-width:760px;margin:auto}
+button{font:inherit;cursor:pointer}
+nav button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:99px;font-size:.85rem}
+nav button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+main{max-width:760px;margin:auto;padding:14px 18px 60px}
+.intro,details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0}
+.intro{padding:14px 16px;font-size:.93rem}.intro p{margin:.3em 0}
+summary{cursor:pointer;padding:12px 16px;display:flex;gap:10px;align-items:center;list-style:none}
+summary::-webkit-details-marker{display:none}
+.no{color:var(--acc);font-weight:700;min-width:2.4em}.nm{font-weight:700;flex:1}.ck{color:var(--acc);opacity:0}.done>summary .ck{opacity:1}
+.body{padding:0 16px 16px;font-size:.95rem}.body p{margin:.5em 0}
+.era{display:inline-block;background:var(--acc2);border-radius:6px;padding:0 8px;font-size:.8rem}
+.keys b{color:var(--acc)}
+details.q{background:var(--bg);margin:8px 0}details.q summary{padding:6px 12px;font-size:.88rem;color:var(--acc)}details.q div{padding:0 12px 8px;font-size:.9rem}
+textarea,input{width:100%;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;font-size:.88rem}
+textarea{min-height:60px}label{display:block;font-size:.8rem;color:var(--mute);margin-top:8px}
+.btn{margin-top:8px;border:1px solid var(--acc);color:var(--acc);background:none;border-radius:8px;padding:4px 12px}
+.done .btn.dn{background:var(--acc);color:#fff}.tb{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}.tb .btn{margin:0}.tb .on{background:var(--acc);color:#fff}
+h2{font-size:1.15rem;margin:22px 0 2px}
+.cv{position:relative;width:100%;margin:10px 0}
+.cv.ed{border:1px dashed var(--line);background:var(--bg);border-radius:6px}
+.bk{position:absolute;line-height:1.5}.bk img{width:100%;display:block;border-radius:6px;pointer-events:none}
+.bk .tx{line-height:1.75;pointer-events:none}.bk .tx p{margin:.35em 0}
+.cv.ed .bk{touch-action:none;cursor:move;user-select:none;-webkit-user-select:none;outline:1px dashed var(--line)}
+.bk.sel{outline:2px solid var(--acc)!important}
+.rz{position:absolute;right:-8px;bottom:-8px;width:18px;height:18px;background:var(--acc);border-radius:50%;cursor:nwse-resize;display:none}.bk.sel .rz{display:block}
+.cap{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.55);color:#fff;font-size:.72rem;line-height:1.4;padding:2px 6px;border-radius:0 0 6px 6px}
+label.btn{display:inline-block;margin-top:0;color:var(--acc);font-size:1rem}
+select{padding:6px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.av{margin-top:6px}
+#fl{display:none;position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--acc);color:#fff;padding:8px 14px;border-radius:8px;z-index:9;font-size:.85rem}
+@media (max-width:640px){.cv{height:auto!important;display:flex;flex-direction:column}.cv .bk{position:static!important;width:100%!important}.cv .bk.im{width:var(--w)!important;align-self:center}}
+</style></head><body>
+<header><h1>藝術史學習地圖</h1><div class="sub">七大章節・依年代編排・文字與圖片可自由排版</div>
+<div class="bar"><i id="pb"></i></div><div class="sub" id="pt"></div>
+<div class="tb"><button class="btn" id="eb" style="display:none">✎ 編輯模式</button></div></header>
+<nav id="nav"></nav><main id="main"></main><div id="fl"></div>
+<script>
+const C=[
+["一、史前","約公元前 3 萬年–前 3000 年",[
+["1-1","洞窟壁畫與史前雕刻","約前 3 萬–前 1800 年",
+"洞窟壁畫是人類最早留下的大型繪畫之一，主要出現在舊石器時代晚期。已知洞穴集中在歐洲西南部，尤其是法國與西班牙，距今約數萬年。\n顏料取自大自然：赭石（含鐵的土壤或礦物）提供紅、黃色，黑色多用木炭或錳礦。人們把礦物磨成粉末，再加入油脂、水等媒介調成液態顏料，用手指、獸毛或骨管塗繪。\n題材以野牛、馬、鹿等動物為主，與狩獵生活息息相關。畫家善用洞壁凹凸不平的岩面，讓形體更立體、有動感。可能與祈求狩獵成功、巫術和儀式有關，但真正用途仍無定論。\n史前人類也用石頭、骨頭與陶土創造形體，表達對生活、信仰與祭祀的理解。維倫多夫的維納斯（約前 23000 年，現藏奧地利）比例誇張，可能象徵生育與豐收；「維納斯」是後人借羅馬愛神命名。新石器時代的印紋陶器與鐘形杯（約前 2800–1800 年）則以幾何紋樣為主，特點是容易重複排列、節奏性強。\n藝術不只是「好不好看」，更是人類生活、文化與思想的重要記錄。",
+"拉斯科洞窟（法國）、阿爾塔米拉洞窟（西班牙）、維倫多夫的維納斯、鐘形杯","已知史前洞穴多分佈在哪兩個國家？｜西班牙、法國"]]],
+["二、古代","前 3100–公元 476 年",[
+["2-1","古埃及","約前 3100–前 30 年",
+"古埃及藝術與國家治理、宗教、墓葬及王權密切相連：金字塔需要龐大資源與勞動組織，神廟浮雕呈現君王與神祇的關係，墓室壁畫描繪死者生前生活與死後世界的活動。\n尼羅河影響一切：河水與沖積土讓農業成為可能，河道是運送人員、糧食、石材的交通線，每年氾濫的週期也塑造了對生命、死亡、再生與自然秩序的觀念。死後審判「秤心」（心臟與羽毛比重量）是常見題材。\n繪畫沒有透視，人物採「正側面律」（複合視點）：頭與腿畫側面，眼與肩畫正面，讓特徵最清楚；以人物大小區分身份，法老最大。象形文字（聖書體）常與圖像並置。常見題材是日常生活、葬禮與死後世界，如沼澤狩獵圖。\n雕塑與建築追求永恆、秩序與身分，因此穩定、莊嚴、對稱、幾何化。雕像以花崗岩、石灰岩製成，有供靈魂寄居的功能；另有人像棺、陪葬俑烏沙布提、黃金面具。阿布辛貝神廟（約前 1300–前 1233 年）高 30 公尺，門前有四座各 20 公尺高的拉美西斯二世坐像。方尖碑立於神廟門前，路克索神廟的柱子則是尼羅河植物的造型延伸。泥磚建造的住宅與宮殿多半難以保存。",
+"吉薩金字塔、圖坦卡門黃金面具、書記官坐像、娜芙蒂蒂胸像、阿布辛貝神廟、路克索神廟","古埃及壁畫人物同時呈現側面頭部與正面軀幹，這種方式稱為？｜複合視角（正側面律）"]
+,["2-2","美索不達米亞","約前 3500–前 539 年",
+"位於底格里斯與幼發拉底兩河流域，發展序列為蘇美、阿卡德、巴比倫、亞述，再到波斯帝國。這裡不以法老、金字塔與來世信仰為核心，而與城市國家的形成、王權競爭、神祇崇拜、戰爭、法律制度與帝國統治密切相關。\n蘇美：發明楔形文字。祭祀雕像有幾何化造型、精細的頭髮鬍子、放大的雙眼與站姿；烏爾軍旗（約前 2600–2400 年）以條帶敘述戰爭與和平；圓筒印章滾壓泥板成圖案；烏爾塔廟（Ziggurat）是階梯狀的神廟高台。阿卡德皇帝頭像展現成熟的鑄銅技術。\n巴比倫：漢摩拉比法典碑（約前 1776 年）把法律刻在石碑上；伊絲塔城門以藍色琉璃磚裝飾；巴別塔傳說與其城市相關。亞述：以善戰聞名，浮雕表現軍事遠征與戰鬥場面，具敘事性與莊重感，也有象徵意義的動物；人首翼牛神獸拉馬蘇守衛宮殿門口，被相信能趕走惡靈。\n波斯：風格承繼巴比倫，波斯波利斯遺址有萬國之門、阿帕達納宮的朝貢浮雕（描繪各民族攜物進貢，表現帝國疆域廣大與多民族臣服的秩序）、以雙頭公牛與雙頭獅為柱頭的波斯柱式，工匠也擅長製作黃金裝飾品如角狀酒杯。",
+"烏爾軍旗、烏爾塔廟、漢摩拉比法典碑、伊絲塔城門、拉馬蘇、波斯波利斯","波斯波利斯朝貢浮雕的主要目的為何？｜表現帝國疆域廣大及多民族臣服的秩序"]
+,["2-3","古希臘（含愛琴海文明）","前 3000–前 30 年",
+"愛琴海文明：邁諾安（前 3000–1100 年，克里特島）以克諾索斯皇宮為代表，壁畫色彩鮮豔、律動感強，題材是自然與生活儀式，執蛇女神形象活潑不拘謹。邁錫尼（希臘南部，見於荷馬史詩）宮殿以中央大廳加側邊數個小室組成，影響後來的希臘神廟；獅子門兼具堡壘防禦功能；阿伽門農面具以純金塑造。\n分期：史前 3000–1200、黑暗時期 1200–800、古樸 800–500、古典 500–330、希臘化 330–30（前）。特色是民主思想與自由，雅典為中心。陶器演變為幾何形、東方化、黑繪式、紅繪式：幾何形講求直線、對稱與形式化（迪皮隆陶瓶）；東方化受近東影響；黑繪式約前 540 年；紅繪式多描寫日常生活。\n建築：神殿有山形牆，比例講究黃金比例，柱頂楣原本有彩繪。三種柱式：多利克（樸實沉穩，稱男性柱，如巴特農神廟）、愛奧尼亞（纖細秀美，稱女性柱，柱頭取自鸚鵡螺般的渦卷，如艾瑞克提恩神廟）、科林斯（由愛奧尼亞演變，裝飾性強，柱頭圍繞莨苕葉，如雅典奧林匹亞宙斯神殿）。羅馬人後來又發展出自己的柱式。\n雕塑：古樸時期僵硬樸拙；古典時期強調精確、均衡、安定的理性表現，菲狄亞斯（巴特農雅典娜）被稱為「神的雕刻家」，米隆作《擲鐵餅者》，波利克萊塔斯作《持矛者》，被稱為「人的雕刻家」。希臘化時期重視人物內心的動靜與外在表情，反映對現實生活的關心與生命力。\n劇場源於戴奧尼索斯崇拜、節慶與比賽，平面分為表演區與觀眾席。\n附・伊特魯里亞（義大利中部，羅馬的前身之一）：饅頭形與住宅型墳墓、樂師舞者與宴會壁畫、神殿模型、石棺，以及象徵羅馬的母狼像。",
+"克諾索斯皇宮、獅子門、巴特農神廟、擲鐵餅者、持矛者、勞孔群像、垂死的高盧人、米羅的維納斯、勝利女神像、戴奧尼索斯劇場","希臘三種基本柱式是什麼？｜多利克、愛奧尼亞、科林斯"]
+,["2-4","古羅馬","前 509–公元 476 年",
+"羅馬承襲希臘與伊特魯里亞的成就，再發展出實用、宏大的風格。\n建築運用拱券、穹頂與混凝土，打造競技場、浴場、水道橋、凱旋門，並發展出自己的柱式。雕塑重視寫實肖像，連皺紋都忠實描繪，另有紀功柱以螺旋浮雕記載戰績。龐貝壁畫與鑲嵌畫保存了當時的室內裝飾與生活。",
+"萬神殿、羅馬競技場、圖拉真紀功柱、龐貝壁畫、奧古斯都像",""]]],
+["三、中世紀","約 2–15 世紀",[
+["3-1","早期基督教","約 2–5 世紀",
+"基督教早期受迫害，信徒在地下墓穴與石棺上用魚、牧羊人、錨等象徵符號傳達信仰。313 年君士坦丁承認基督教後，大型教堂興起，採用羅馬公共建築的「巴西利卡」長方形平面。",
+"羅馬地下墓穴、舊聖彼得大教堂、聖母大殿鑲嵌畫",""],
+["3-2","拜占庭","330–1453 年",
+"以君士坦丁堡為中心的東羅馬帝國藝術。金色背景的鑲嵌畫與聖像讓人物正面、莊嚴、平面化，重視靈性而非寫實。建築以大穹頂覆蓋方形空間為特色。",
+"聖索菲亞大教堂、拉文納聖維他勒教堂鑲嵌畫、聖像畫",""],
+["3-3","羅馬式","約 10–12 世紀",
+"因朝聖與修道院興盛而發展。教堂以厚牆、圓拱與桶形拱頂支撐，窗小而室內昏暗厚重；雕刻集中在門楣與柱頭，以聖經故事教育不識字的信徒。",
+"比薩大教堂、克呂尼修道院、聖賽南教堂",""],
+["3-4","哥德式與手抄本","約 12–15 世紀",
+"尖拱、肋骨拱頂與飛扶壁分擔重量，使牆面能開大窗，彩繪玻璃把光變成神聖的象徵，教堂向上延伸。同時修道院與宮廷製作華麗的彩飾手抄本，細膩描繪日常與宗教場景。",
+"巴黎聖母院、沙特爾主教座堂、貝里公爵豪華時禱書",""]]],
+["四、文藝復興","14–16 世紀",[
+["4-1","其背景與文藝復興早期","14–15 世紀",
+"義大利城邦（如佛羅倫斯）商業繁榮，富商與教會贊助藝術；人文主義重新研究古希臘羅馬，重視人的價值。藝術家發展線性透視與解剖研究，讓畫面具有可信的空間感與立體感。",
+"喬托、馬薩其奧《聖三位一體》、布魯內雷斯基的穹頂、多那太羅《大衛》、波提切利《維納斯的誕生》",""],
+["4-2","文藝復興盛期","約 1490–1527 年",
+"古典理想的巔峰：構圖穩定、比例和諧、形象理想化，集中於羅馬與佛羅倫斯。三傑各有專長：達文西的明暗暈塗法與科學觀察、米開朗基羅的力量與雕塑感、拉斐爾的優雅與秩序。",
+"達文西《蒙娜麗莎》《最後的晚餐》、米開朗基羅《大衛》《創世紀》、拉斐爾《雅典學院》",""],
+["4-3","北方文藝復興","15–16 世紀",
+"在阿爾卑斯山以北（尼德蘭、德國）發展，油畫技法使細節、質感與光澤極為精細，常把宗教象徵藏在日常物件裡。版畫的流行也讓藝術傳播更廣。",
+"范艾克《阿爾諾芬尼夫婦》、杜勒、波希、老布勒哲爾",""]]],
+["五、文藝復興後","16–19 世紀",[
+["5-1","矯飾主義","約 1520–1600 年",
+"反抗盛期的和諧，刻意追求個人風格：人物被拉長、姿勢扭曲、色彩不自然、空間拼貼般複雜，帶來緊張與不安。",
+"帕米賈尼諾《長頸聖母》、艾爾·格雷考、布龍齊諾",""],
+["5-2","巴洛克","17 世紀",
+"反宗教改革時期，教會與王權用戲劇性的藝術感動大眾：動感、對角線構圖、強烈明暗對比與強烈情感。荷蘭則因市民社會興起，盛行肖像、靜物與風俗畫。",
+"卡拉瓦喬、貝尼尼《聖女泰瑞莎的狂喜》、倫勃朗、維拉斯奎茲《宮娥》、維梅爾",""],
+["5-3","洛可可","約 1720–1780 年",
+"從巴洛克發展出來，流行於法國貴族沙龍。風格輕盈、華麗，用粉彩色與纖細曲線描繪愛情、遊樂與田園。",
+"華鐸《舟發西苔島》、布雪、福拉哥納爾《鞦韆》",""],
+["5-4","學院派","17–19 世紀",
+"由官方藝術學院教育制度形成：強調素描基礎、古典典範與規範，歷史畫地位最高；作品透過沙龍展評審，影響畫家名聲與收入，後來成為前衛畫家反抗的對象。",
+"法國皇家繪畫與雕塑學院、沙龍展、卡巴內爾、布格羅",""],
+["5-5","新古典","約 1760–1830 年",
+"啟蒙運動、龐貝等古城的考古發現與法國大革命背景下，藝術回歸古典的理性、清晰輪廓與道德英雄主題，反對洛可可的輕浮。",
+"大衛《荷拉斯兄弟之誓》《馬拉之死》、安格爾《大宮女》",""]]],
+["六、十九世紀","1800–1900 年",[
+["6-1","浪漫","約 1800–1850 年",
+"反對新古典的理性，重視情感、想像、個人與大自然的崇高，也偏愛歷史、文學與異國題材，色彩奔放、筆觸有力。",
+"德拉克洛瓦《自由引導人民》、傑利柯《梅杜薩之筏》、泰納、弗里德里希、哥雅",""],
+["6-2","寫實","約 1840–1880 年",
+"主張描繪眼前的當代生活，尤其是農民與勞工，不美化也不理想化；作品以大畫幅處理平凡人物，在當時引發爭議。",
+"庫爾貝《奧爾南的葬禮》、米勒《拾穗》、杜米埃",""],
+["6-3","印象","1870–1880 年代",
+"受光學與攝影發明影響，畫家走到戶外，捕捉光線與瞬間色彩，以短促、鬆散的筆觸並置色點。1874 年的首次聯展被評論家嘲諷為「印象」，因莫內《印象·日出》而得名。",
+"莫內《印象·日出》、雷諾瓦、德加、莫莉索",""],
+["6-4","後印象","約 1886–1905 年",
+"承接印象派又不滿足於只記錄光色，各自走向個人表現、穩固結構與象徵：梵谷用強烈筆觸表達情感，塞尚重建物體結構，高更追求原始與象徵，秀拉用點描科學地分析色彩。",
+"梵谷《星夜》、塞尚《聖維克多山》、高更、秀拉《大碗島的星期天》",""]]],
+["七、二十世紀","1860 年代–1970 年代",[
+["7-1","現代藝術","約 1860s–1970 年",
+"擺脫「再現現實」的任務，開始重視形式、色彩、媒材與觀念本身。從馬奈開始，各種前衛「主義」快速接連登場，每一個都在挑戰前一個。",
+"馬奈《奧林匹亞》、前衛藝術",""],
+["7-2","野獸派","1905–1908 年",
+"1905 年秋季沙龍因色彩大膽被稱為「野獸」。畫面使用純色、扁平構圖，色彩脫離物體的真實顏色，直接表達情感。",
+"馬諦斯《舞蹈》、德朗",""],
+["7-3","立體派","1907–1914 年",
+"不再用單一視點，而同時呈現物體的多個側面，將形體分解成幾何塊面。分為分析立體與綜合立體（加入拼貼）。",
+"畢卡索《亞維農的少女》《格爾尼卡》、布拉克",""],
+["7-4","達達主義與超現實","1916–1940 年代",
+"達達在一次大戰中誕生，反戰、反藝術、重視偶然與現成物；超現實受佛洛伊德影響，探索夢與潛意識，用不合理的並置創造奇異畫面。",
+"杜象《噴泉》、達利《記憶的永恆》、馬格利特、恩斯特",""],
+["7-5","抽象","1910 年代起",
+"畫面不再描繪具體物象，直接以色彩、線條與形狀表達。包含康丁斯基的抒情抽象、蒙德里安的幾何抽象，以及戰後美國的抽象表現主義。",
+"康丁斯基、蒙德里安、馬列維奇、帕洛克、羅斯科",""],
+["7-6","普普","1950–1960 年代",
+"取材漫畫、廣告、明星與商品等大眾文化，縮短藝術與生活的距離，既批判也擁抱消費社會，常用絹印與重複的影像。",
+"安迪·沃荷《瑪麗蓮夢露》《金寶湯罐頭》、利希滕斯坦、漢密爾頓",""]]]
+];
+const esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+const $=id=>document.getElementById(id);
+let D=JSON.parse(JSON.stringify(C)),L={},S={d:{},n:{}},db=null,as=null,canEd=false,ld=false,edit=false,cur=-1,sel=null,drag=null,rc=0;
+try{S=JSON.parse(localStorage.getItem("arthist"))||S}catch(e){}
+const svS=()=>{try{localStorage.setItem("arthist",JSON.stringify(S))}catch(e){}};
+const fix=()=>D.forEach(c=>c[2].forEach(s=>{s[6]=s[6]||"s"+String(s[0]).replace(/\W/g,"_")}));fix();
+const sec=u=>{for(const c of D)for(const s of c[2])if(s[6]===u)return s};
+const tot=()=>D.reduce((a,c)=>a+c[2].length,0);
+function flash(t){const f=$("fl");f.textContent=t;f.style.display="block";setTimeout(()=>f.style.display="none",4500)}
+const er=x=>flash("儲存失敗："+((x&&(x.message||x.code))||"未知錯誤"));
+const T={},later=(k,f)=>{clearTimeout(T[k]);T[k]=setTimeout(f,500)};
+const saveD=()=>later("D",()=>db&&db.doc("content/main").set({j:JSON.stringify(D)}).catch(er));
+const saveL=u=>later("L"+u,()=>db&&L[u]&&db.doc("layout/"+u).set({j:JSON.stringify(L[u])}).catch(er));
+const ptxt=t=>(t||"").split("\n").filter(Boolean).map(p=>`<p>${esc(p)}</p>`).join("");
+function lay(s){const u=s[6];if(L[u])return L[u];
+ const n=(s[3]||"").split("\n").filter(Boolean).reduce((a,p)=>a+Math.ceil(p.length/38)+.4,0),h=Math.round(n*27)+10,b=[{t:"text",x:0,y:0,w:100,s:15,tx:s[3]||""}];let y=h+8;
+ if(s[4]){b.push({t:"text",x:0,y,w:100,s:15,tx:"代表："+s[4]});y+=60}
+ return{h:y+10,b}}
+function bh(m,i,o,ed,sl){const img=m.t==="img";
+ return `<div class="bk${img?" im":""}${sl?" sel":""}" data-i="${i}" style="left:${m.x}%;top:${m.y}px;width:${m.w}%;order:${o};--w:${m.w}%">`+(img?`<img src="/_blob/${m.id}" draggable="false" alt="${esc(m.cap)}">${m.cap?`<span class="cap">${esc(m.cap)}</span>`:""}`:`<div class="tx" style="font-size:${m.s||15}px">${ptxt(m.tx)}</div>`)+(ed?'<i class="rz"></i>':"")+`</div>`}
+function cvH(s,ed){const l=lay(s),u=s[6],r=l.b.map((m,i)=>i).sort((a,b)=>l.b[a].y-l.b[b].y||l.b[a].x-l.b[b].x);
+ return `<div class="cv${ed?" ed":""}" data-u="${u}" style="height:${l.h}px">`+l.b.map((m,i)=>bh(m,i,r.indexOf(i),ed,ed&&sel&&sel.u===u&&sel.i===i)).join("")+`</div>`}
+function cvIn(s){const u=s[6],l=lay(s),m=sel&&sel.u===u?l.b[sel.i]:null;
+ return `<label>版面：拖曳方塊移動，點選後拖右下圓點縮放（請用電腦或平板編輯）</label><div class="tb"><label class="btn">＋圖片<input type="file" accept="image/*" multiple hidden data-up="${u}"></label><button class="btn" data-a="addt" data-u="${u}">＋文字方塊</button><button class="btn" data-a="h" data-d="-60" data-u="${u}">畫布變矮</button><button class="btn" data-a="h" data-d="60" data-u="${u}">畫布變高</button></div>`+cvH(s,true)+(m?`<div class="tb">`+(m.t==="text"?`<textarea data-bt="${u}" style="min-height:110px">${esc(m.tx)}</textarea><select data-bs="${u}">${[12,14,15,17,20,26].map(n=>`<option${n==(m.s||15)?" selected":""}>${n}</option>`).join("")}</select>`:`<input data-cap="${u}" placeholder="圖說" value="${esc(m.cap)}" style="flex:1">`)+`<button class="btn" data-a="top" data-u="${u}">移到最上層</button><button class="btn" data-a="rm" data-u="${u}">刪除方塊</button></div>`:"")+`<div class="sub" data-msg></div>`}
+function refresh(u){const s=sec(u),w=document.querySelector(`.cw[data-w="${CSS.escape(u)}"]`);if(s&&w)w.innerHTML=cvIn(s)}
+const msg=(u,t)=>{const m=document.querySelector(`.cw[data-w="${CSS.escape(u)}"] [data-msg]`);if(m)m.textContent=t};
+function prog(){const n=Object.values(S.d).filter(Boolean).length;$("pb").style.width=Math.min(100,n/tot()*100)+"%";$("pt").textContent="已學會 "+n+" / "+tot()+" 個小節"}
+function nav(){$("nav").innerHTML=["全部",...D.map(c=>c[0])].map((t,i)=>`<button class="${i-1===cur?"on":""}" data-i="${i-1}">${esc(t)}</button>`).join("")}
+function card(s,ci,si){const id=s[0],a=`data-c="${ci}" data-s="${si}"`;
+ if(edit){const f=(i,l)=>`<label>${l}<input ${a} data-f="${i}" value="${esc(s[i])}"></label>`;
+  return `<details open><summary><span class="no">${esc(id)}</span><span class="nm">${esc(s[1])}</span></summary><div class="body">${f(0,"編號")}${f(1,"名稱")}${f(2,"年代")}<label>小測驗（題目｜答案）<textarea ${a} data-f="5" style="min-height:50px">${esc(s[5])}</textarea></label><div class="cw" data-w="${s[6]}">${cvIn(s)}</div><button class="btn del" ${a}>刪除此小節</button></div></details>`}
+ const q=(s[5]||"").split("｜");
+ return `<details class="${S.d[id]?"done":""}"><summary><span class="no">${esc(id)}</span><span class="nm">${esc(s[1])}</span><span class="ck">✓</span></summary><div class="body"><span class="era">${esc(s[2])}</span>${cvH(s,false)}${s[5]?`<details class="q"><summary>小測驗</summary><div>${esc(q[0])}<br><button class="btn ans">顯示答案</button><div class="av" hidden><b>答案：</b>${esc(q[1]||"")}</div></div></details>`:""}<label>備註</label><textarea data-n="${esc(id)}" placeholder="寫下自己的筆記…">${esc(S.n[id]||"")}</textarea><button class="btn dn" data-id="${esc(id)}">${S.d[id]?"已學會 ✓":"標記為已學會"}</button></div></details>`}
+function render(){
+ let h=`<div class="intro"><p><b>藝術史是什麼？</b>藝術史研究人類如何用圖像、建築與物件表達信仰、權力與感受，並理解它們為何在某個時代以那樣的面貌出現。</p><p><b>年代標示：</b>B.C.（Before Christ）是公元前，數字越大越早，如 25000 B.C.；AD（anno domini）是公元後，如 2026 AD。</p><p><b>大脈絡：</b>史前與古代（史前、古埃及、蘇美、古希臘、古羅馬）→ 中世紀（早期基督教、拜占庭、哥德式）→ 文藝復興（初期、盛期、晚期、矯飾主義）→ 巴洛克 → 洛可可 → 新古典，之後進入十九、二十世紀。</p></div>`;
+ D.forEach((c,ci)=>{if(cur>=0&&cur!==ci)return;
+  h+=`<h2>${esc(c[0])}</h2><div class="sub">${esc(c[1])}</div>`+c[2].map((s,si)=>card(s,ci,si)).join("")+(edit?`<button class="btn" data-add="${ci}">＋新增小節</button>`:"")});
+ $("main").innerHTML=h;prog();nav()}
+document.addEventListener("click",e=>{const g=x=>e.target.closest(x);let b;
+ if(b=g("nav button")){cur=+b.dataset.i;render();scrollTo(0,0)}
+ else if(b=g(".dn")){const id=b.dataset.id;S.d[id]=!S.d[id];svS();b.closest("details").classList.toggle("done",!!S.d[id]);b.textContent=S.d[id]?"已學會 ✓":"標記為已學會";prog()}
+ else if(b=g(".ans")){const v=b.nextElementSibling;v.hidden=!v.hidden;b.textContent=v.hidden?"顯示答案":"隱藏答案"}
+ else if(b=g("[data-add]")){D[+b.dataset.add][2].push(["新-"+Math.floor(Math.random()*900+100),"新小節","","（在此輸入內容）","","","n"+Math.random().toString(36).slice(2,8)]);saveD();render()}
+ else if(b=g(".del")){if(b.dataset.ok){const s=D[+b.dataset.c][2].splice(+b.dataset.s,1)[0];if(db&&s)db.doc("layout/"+s[6]).delete().catch(()=>{});delete L[s&&s[6]];saveD();render()}else{b.dataset.ok=1;b.textContent="再按一次確認刪除"}}
+ else if(b=g("button[data-a]")){const d=b.dataset,s=sec(d.u);if(!s)return;const l=L[d.u]=lay(s);
+  if(d.a==="addt"){l.b.push({t:"text",x:5,y:10,w:40,s:15,tx:"新文字"});sel={u:d.u,i:l.b.length-1}}
+  else if(d.a==="h")l.h=Math.max(120,l.h+ +d.d);
+  else if(d.a==="rm"&&sel){l.b.splice(sel.i,1);sel=null}
+  else if(d.a==="top"&&sel){const m=l.b.splice(sel.i,1)[0];l.b.push(m);sel.i=l.b.length-1}
+  saveL(d.u);refresh(d.u)}});
+document.addEventListener("input",e=>{const t=e.target,d=t.dataset;
+ if(d.f!=null){D[+d.c][2][+d.s][+d.f]=t.value;saveD()}
+ else if(d.n){S.n[d.n]=t.value;svS()}
+ else if(d.bt&&sel){L[d.bt].b[sel.i].tx=t.value;const x=document.querySelector(`.cv[data-u="${d.bt}"] .bk[data-i="${sel.i}"] .tx`);if(x)x.innerHTML=ptxt(t.value);saveL(d.bt)}
+ else if(d.cap&&sel){L[d.cap].b[sel.i].cap=t.value;saveL(d.cap)}});
+document.addEventListener("change",async e=>{const t=e.target,d=t.dataset;
+ if(d.bs&&sel){L[d.bs].b[sel.i].s=+t.value;saveL(d.bs);const x=document.querySelector(`.cv[data-u="${d.bs}"] .bk[data-i="${sel.i}"] .tx`);if(x)x.style.fontSize=t.value+"px";return}
+ const u=d.up;if(!u)return;const s=sec(u);if(!as){msg(u,"目前無法上傳圖片（需要編輯權限）");return}
+ const l=L[u]=lay(s);let bad="";
+ for(const f of t.files){try{const r=await as.upload(f);l.b.push({t:"img",id:r.id,x:5+l.b.length*3,y:10+l.b.length*12,w:40,cap:""});sel={u,i:l.b.length-1}}catch(x){bad="上傳失敗："+((x&&(x.message||x.code))||"未知錯誤")}}
+ saveL(u);refresh(u);if(bad)msg(u,bad)});
+document.addEventListener("pointerdown",e=>{const el=e.target.closest(".cv.ed .bk");if(!el||innerWidth<=640)return;
+ const cv=el.parentNode,u=cv.dataset.u,l=L[u]=lay(sec(u)),i=+el.dataset.i,m=l.b[i],prev=sel,was=!!sel&&sel.u===u&&sel.i===i;
+ sel={u,i};cv.querySelectorAll(".bk").forEach(x=>x.classList.toggle("sel",x===el));
+ drag={el,cv,u,m,rz:!!e.target.closest(".rz"),sx:e.clientX,sy:e.clientY,x:m.x,y:m.y,w:m.w,was,prev,mv:false};el.setPointerCapture(e.pointerId);e.preventDefault()});
+document.addEventListener("pointermove",e=>{if(!drag)return;const r=drag.cv.getBoundingClientRect(),dx=(e.clientX-drag.sx)/r.width*100,dy=e.clientY-drag.sy,m=drag.m;drag.mv=true;
+ if(drag.rz){m.w=Math.max(8,Math.min(100,drag.w+dx));drag.el.style.width=m.w+"%"}
+ else{m.x=Math.max(-10,Math.min(95,drag.x+dx));m.y=Math.round(Math.max(-20,drag.y+dy));drag.el.style.left=m.x+"%";drag.el.style.top=m.y+"px"}});
+document.addEventListener("pointerup",()=>{if(!drag)return;const d=drag;drag=null;if(d.mv)saveL(d.u);if(!d.was)refresh(d.u);if(d.prev&&d.prev.u!==d.u)refresh(d.prev.u)});
+$("eb").onclick=function(){edit=!edit;sel=null;this.classList.toggle("on",edit);this.textContent=edit?"✓ 完成編輯":"✎ 編輯模式";render()};
+render();
+(async()=>{try{const u=await claude.use("user");canEd=u?await u.canEdit():false}catch(e){}
+ try{db=await claude.use("db")}catch(e){}try{as=await claude.use("assets")}catch(e){}
+ if(db){try{const r=await db.doc("content/main").get();if(r.exists&&r.data().j){D=JSON.parse(r.data().j);fix()}ld=true}catch(e){}
+  try{const q=await db.collection("layout").get();q.docs.forEach(x=>{try{L[x.id]=JSON.parse(x.data().j)}catch(e){}})}catch(e){}}
+ $("eb").style.display=canEd&&db&&ld?"":"none";if(!edit)render()})();
+</script></body></html>
