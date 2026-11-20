@@ -8,14 +8,14 @@
 :root[data-theme="dark"]{--bg:#1d1a17;--card:#27231f;--ink:#efe7da;--mute:#a79c8d;--line:#3d362f;--acc:#e08a6f;--acc2:#3a2f27;color-scheme:dark}
 html{scroll-padding-top:70px}*{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Serif TC","Songti TC",serif;line-height:1.75}
-header{padding:28px 18px 8px;max-width:760px;margin:auto}
+header{padding:28px 24px 8px;max-width:1100px;margin:auto}
 h1{margin:0;font-size:1.7rem;letter-spacing:.08em}.sub{color:var(--mute);font-size:.9rem}
 .bar{height:8px;background:var(--acc2);border-radius:9px;margin:12px 0 4px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s}
-nav{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;gap:8px;overflow-x:auto;padding:10px 18px;border-bottom:1px solid var(--line);max-width:760px;margin:auto}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;gap:8px;overflow-x:auto;padding:10px 24px;border-bottom:1px solid var(--line);max-width:1100px;margin:auto}
 button{font:inherit;cursor:pointer}
 nav button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:99px;font-size:.85rem}
 nav button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
-main{max-width:760px;margin:auto;padding:14px 18px 60px}
+main{max-width:1100px;margin:auto;padding:14px 24px 60px}
 .intro,details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0}
 .intro{padding:14px 16px;font-size:.93rem}.intro p{margin:.3em 0}
 summary{cursor:pointer;padding:12px 16px;display:flex;gap:10px;align-items:center;list-style:none}
@@ -33,20 +33,24 @@ h2{font-size:1.15rem;margin:22px 0 2px}
 .cv{position:relative;width:100%;margin:10px 0}
 .cv.ed{border:1px dashed var(--line);background:var(--bg);border-radius:6px}
 .bk{position:absolute;line-height:1.5}.bk img{width:100%;display:block;border-radius:6px;pointer-events:none}
-.bk .tx{line-height:1.75;pointer-events:none}.bk .tx p{margin:.35em 0}
+.bk .tx{line-height:1.75;pointer-events:none}.bk .tx p,.bk .tx div{margin:.35em 0}
 .cv.ed .bk{touch-action:none;cursor:move;user-select:none;-webkit-user-select:none;outline:1px dashed var(--line)}
 .bk.sel{outline:2px solid var(--acc)!important}
 .rz{position:absolute;right:-8px;bottom:-8px;width:18px;height:18px;background:var(--acc);border-radius:50%;cursor:nwse-resize;display:none}.bk.sel .rz{display:block}
 .cap{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.55);color:#fff;font-size:.72rem;line-height:1.4;padding:2px 6px;border-radius:0 0 6px 6px}
 label.btn{display:inline-block;margin-top:0;color:var(--acc);font-size:1rem}
-select{padding:6px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+select{padding:5px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
 .av{margin-top:6px}
-#fl{display:none;position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--acc);color:#fff;padding:8px 14px;border-radius:8px;z-index:9;font-size:.85rem}
-@media (max-width:640px){.cv{height:auto!important;display:flex;flex-direction:column}.cv .bk{position:static!important;width:100%!important}.cv .bk.im{width:var(--w)!important;align-self:center}}
+.rt{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--card);width:100%}
+.rt button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;min-width:30px;height:28px;padding:0 6px}
+.rt .sw{width:22px;min-width:22px;height:22px;border-radius:50%;padding:0}
+.rt .l{font-size:.75rem;color:var(--mute)}
+.tx[contenteditable=true]{pointer-events:auto!important;user-select:text;-webkit-user-select:text;cursor:text;outline:2px solid var(--acc);background:var(--card);padding:2px 4px;border-radius:4px}
+#fl{display:none;position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--acc);color:#fff;padding:8px 14px;border-radius:8px;z-index:9;font-size:.85rem}
 </style></head><body>
-<header><h1>藝術史學習地圖</h1><div class="sub">七大章節・依年代編排・文字與圖片可自由排版</div>
+<header><h1>藝術史學習地圖</h1><div class="sub">七大章節・依年代編排</div>
 <div class="bar"><i id="pb"></i></div><div class="sub" id="pt"></div>
-<div class="tb"><button class="btn" id="eb" style="display:none">✎ 編輯模式</button></div></header>
+<div class="tb" id="tools" style="display:none"><button class="btn" id="eb">✎ 編輯模式</button><button class="btn" id="ex">⬇ 匯出 content.json</button><label class="btn">⬆ 匯入<input type="file" accept=".json,application/json" hidden id="imp"></label><button class="btn" id="rs">↺ 放棄本機草稿</button></div><div class="sub" id="tm"></div></header>
 <nav id="nav"></nav><main id="main"></main><div id="fl"></div>
 <script>
 const C=[
@@ -141,78 +145,104 @@ const C=[
 ];
 const esc=s=>String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
 const $=id=>document.getElementById(id);
-let D=JSON.parse(JSON.stringify(C)),L={},S={d:{},n:{}},db=null,as=null,canEd=false,ld=false,edit=false,cur=-1,sel=null,drag=null,rc=0;
+const EDIT=/[?&#]edit/.test(location.search+location.hash);
+let D=JSON.parse(JSON.stringify(C)),L={},S={d:{},n:{}},edit=false,cur=0,sel=null,drag=null,rc=0,edTx=null,sv=null,pxv=16;
 try{S=JSON.parse(localStorage.getItem("arthist"))||S}catch(e){}
 const svS=()=>{try{localStorage.setItem("arthist",JSON.stringify(S))}catch(e){}};
+const idb=(m,v)=>new Promise((ok,no)=>{const r=indexedDB.open("arthist3",1);r.onupgradeneeded=()=>r.result.createObjectStore("s");r.onerror=()=>no(r.error);r.onsuccess=()=>{const s=r.result.transaction("s",m==="get"?"readonly":"readwrite").objectStore("s"),q=m==="get"?s.get("state"):m==="set"?s.put(v,"state"):s.delete("state");q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)}});
+function flash(t){const f=$("fl");f.textContent=t;f.style.display="block";setTimeout(()=>f.style.display="none",4500)}
+const T={},later=(k,f)=>{clearTimeout(T[k]);T[k]=setTimeout(f,500)};
+const save=()=>later("S",()=>idb("set",{D,L}).then(()=>$("tm").textContent="已存到本機草稿（尚未發佈，請按「匯出」）").catch(()=>flash("無法存到本機草稿")));
+const saveL=save,saveD=save;
 const fix=()=>D.forEach(c=>c[2].forEach(s=>{s[6]=s[6]||"s"+String(s[0]).replace(/\W/g,"_")}));fix();
 const sec=u=>{for(const c of D)for(const s of c[2])if(s[6]===u)return s};
 const tot=()=>D.reduce((a,c)=>a+c[2].length,0);
-function flash(t){const f=$("fl");f.textContent=t;f.style.display="block";setTimeout(()=>f.style.display="none",4500)}
-const er=x=>flash("儲存失敗："+((x&&(x.message||x.code))||"未知錯誤"));
-const T={},later=(k,f)=>{clearTimeout(T[k]);T[k]=setTimeout(f,500)};
-const saveD=()=>later("D",()=>db&&db.doc("content/main").set({j:JSON.stringify(D)}).catch(er));
-const saveL=u=>later("L"+u,()=>db&&L[u]&&db.doc("layout/"+u).set({j:JSON.stringify(L[u])}).catch(er));
 const ptxt=t=>(t||"").split("\n").filter(Boolean).map(p=>`<p>${esc(p)}</p>`).join("");
+const OK={B:1,I:1,U:1,S:1,STRIKE:1,STRONG:1,EM:1,SPAN:1,BR:1,DIV:1,P:1},PR=["color","background-color","font-size","text-align","font-weight","font-style","text-decoration"];
+function clean(h){const d=new DOMParser().parseFromString("<body>"+h,"text/html").body;
+ (function w(n){[...n.childNodes].forEach(c=>{if(c.nodeType!==1){if(c.nodeType!==3)c.remove();return}
+  if(!OK[c.tagName]){if(["SCRIPT","STYLE","IFRAME","OBJECT"].includes(c.tagName)){c.remove();return}w(c);c.replaceWith(...c.childNodes);return}
+  const st=[];PR.forEach(p=>{const v=c.style.getPropertyValue(p);if(v&&/^[#\w\s.,()%-]+$/.test(v))st.push(p+":"+v)});
+  [...c.attributes].forEach(a=>c.removeAttribute(a.name));if(st.length)c.setAttribute("style",st.join(";"));w(c)})})(d);return d.innerHTML}
+const bhtml=m=>m.h!=null?clean(m.h):ptxt(m.tx);
 function lay(s){const u=s[6];if(L[u])return L[u];
- const n=(s[3]||"").split("\n").filter(Boolean).reduce((a,p)=>a+Math.ceil(p.length/38)+.4,0),h=Math.round(n*27)+10,b=[{t:"text",x:0,y:0,w:100,s:15,tx:s[3]||""}];let y=h+8;
+ const n=(s[3]||"").split("\n").filter(Boolean).reduce((a,p)=>a+Math.ceil(p.length/46)+.4,0),h=Math.round(n*27)+10,b=[{t:"text",x:0,y:0,w:100,s:15,tx:s[3]||""}];let y=h+8;
  if(s[4]){b.push({t:"text",x:0,y,w:100,s:15,tx:"代表："+s[4]});y+=60}
  return{h:y+10,b}}
-function bh(m,i,o,ed,sl){const img=m.t==="img";
- return `<div class="bk${img?" im":""}${sl?" sel":""}" data-i="${i}" style="left:${m.x}%;top:${m.y}px;width:${m.w}%;order:${o};--w:${m.w}%">`+(img?`<img src="/_blob/${m.id}" draggable="false" alt="${esc(m.cap)}">${m.cap?`<span class="cap">${esc(m.cap)}</span>`:""}`:`<div class="tx" style="font-size:${m.s||15}px">${ptxt(m.tx)}</div>`)+(ed?'<i class="rz"></i>':"")+`</div>`}
-function cvH(s,ed){const l=lay(s),u=s[6],r=l.b.map((m,i)=>i).sort((a,b)=>l.b[a].y-l.b[b].y||l.b[a].x-l.b[b].x);
- return `<div class="cv${ed?" ed":""}" data-u="${u}" style="height:${l.h}px">`+l.b.map((m,i)=>bh(m,i,r.indexOf(i),ed,ed&&sel&&sel.u===u&&sel.i===i)).join("")+`</div>`}
+function bh(m,i,ed,sl){const img=m.t==="img";
+ return `<div class="bk${sl?" sel":""}" data-i="${i}" style="left:${m.x}%;top:${m.y}px;width:${m.w}%">`+(img?`<img src="${esc(m.src)}" draggable="false" alt="${esc(m.cap)}">${m.cap?`<span class="cap">${esc(m.cap)}</span>`:""}`:`<div class="tx" style="font-size:${m.s||15}px${m.c?";color:"+esc(m.c):""}">${bhtml(m)}</div>`)+(ed?'<i class="rz"></i>':"")+`</div>`}
+function cvH(s,ed){const l=lay(s),u=s[6];
+ return `<div class="cv${ed?" ed":""}" data-u="${u}" style="height:${l.h}px">`+l.b.map((m,i)=>bh(m,i,ed,ed&&sel&&sel.u===u&&sel.i===i)).join("")+`</div>`}
+const FC=["#2b2622","#9c3d2e","#c0392b","#d9822b","#2e7d32","#1565c0","#6a1b9a","#7a7066"],HC=["#fff3a3","#ffd6d6","#d6f5d6","#d6e8ff","transparent"];
+function rtool(u){return `<div class="rt"><button data-cmd="bold"><b>B</b></button><button data-cmd="italic"><i>I</i></button><button data-cmd="underline"><u>U</u></button><button data-cmd="strikeThrough"><s>S</s></button><span class="l">文字色</span>`+FC.map(c=>`<button class="sw" data-fc="${c}" style="background:${c}"></button>`).join("")+`<input type="color" data-col value="#9c3d2e" title="自訂顏色"><span class="l">標記</span>`+HC.map(c=>`<button class="sw" data-hc="${c}" style="background:${c==="transparent"?"var(--bg)":c}">${c==="transparent"?"✕":""}</button>`).join("")+`<span class="l">字級</span><select data-fs><option value="">選取字級</option>${[12,14,16,18,20,24,28,32,40].map(n=>`<option>${n}</option>`).join("")}</select><button data-cmd="justifyLeft">⇤</button><button data-cmd="justifyCenter">≡</button><button data-cmd="justifyRight">⇥</button><button data-cmd="removeFormat">清除格式</button></div>`}
 function cvIn(s){const u=s[6],l=lay(s),m=sel&&sel.u===u?l.b[sel.i]:null;
- return `<label>版面：拖曳方塊移動，點選後拖右下圓點縮放（請用電腦或平板編輯）</label><div class="tb"><label class="btn">＋圖片<input type="file" accept="image/*" multiple hidden data-up="${u}"></label><button class="btn" data-a="addt" data-u="${u}">＋文字方塊</button><button class="btn" data-a="h" data-d="-60" data-u="${u}">畫布變矮</button><button class="btn" data-a="h" data-d="60" data-u="${u}">畫布變高</button></div>`+cvH(s,true)+(m?`<div class="tb">`+(m.t==="text"?`<textarea data-bt="${u}" style="min-height:110px">${esc(m.tx)}</textarea><select data-bs="${u}">${[12,14,15,17,20,26].map(n=>`<option${n==(m.s||15)?" selected":""}>${n}</option>`).join("")}</select>`:`<input data-cap="${u}" placeholder="圖說" value="${esc(m.cap)}" style="flex:1">`)+`<button class="btn" data-a="top" data-u="${u}">移到最上層</button><button class="btn" data-a="rm" data-u="${u}">刪除方塊</button></div>`:"")+`<div class="sub" data-msg></div>`}
+ return `<label>版面：拖曳方塊移動；點選後拖右下圓點縮放；雙擊文字方塊進入編輯，選取文字後用工具列變色或調整</label><div class="tb"><label class="btn">＋圖片<input type="file" accept="image/*" multiple hidden data-up="${u}"></label><button class="btn" data-a="addt" data-u="${u}">＋文字方塊</button><button class="btn" data-a="h" data-d="-60" data-u="${u}">畫布變矮</button><button class="btn" data-a="h" data-d="60" data-u="${u}">畫布變高</button></div>`+(m&&m.t==="text"?rtool(u):"")+cvH(s,true)+(m?`<div class="tb">`+(m.t==="text"?`<span class="l">整體字級</span><select data-bs="${u}">${[12,14,15,17,20,26].map(n=>`<option${n==(m.s||15)?" selected":""}>${n}</option>`).join("")}</select>`:`<input data-cap="${u}" placeholder="圖說" value="${esc(m.cap)}" style="flex:1">`)+`<button class="btn" data-a="top" data-u="${u}">移到最上層</button><button class="btn" data-a="rm" data-u="${u}">刪除方塊</button></div>`:"")+`<div class="sub" data-msg></div>`}
 function refresh(u){const s=sec(u),w=document.querySelector(`.cw[data-w="${CSS.escape(u)}"]`);if(s&&w)w.innerHTML=cvIn(s)}
 const msg=(u,t)=>{const m=document.querySelector(`.cw[data-w="${CSS.escape(u)}"] [data-msg]`);if(m)m.textContent=t};
 function prog(){const n=Object.values(S.d).filter(Boolean).length;$("pb").style.width=Math.min(100,n/tot()*100)+"%";$("pt").textContent="已學會 "+n+" / "+tot()+" 個小節"}
-function nav(){$("nav").innerHTML=["全部",...D.map(c=>c[0])].map((t,i)=>`<button class="${i-1===cur?"on":""}" data-i="${i-1}">${esc(t)}</button>`).join("")}
+function nav(){$("nav").innerHTML=D.map((c,i)=>`<button class="${i===cur?"on":""}" data-i="${i}">${esc(c[0])}</button>`).join("")}
 function card(s,ci,si){const id=s[0],a=`data-c="${ci}" data-s="${si}"`;
  if(edit){const f=(i,l)=>`<label>${l}<input ${a} data-f="${i}" value="${esc(s[i])}"></label>`;
   return `<details open><summary><span class="no">${esc(id)}</span><span class="nm">${esc(s[1])}</span></summary><div class="body">${f(0,"編號")}${f(1,"名稱")}${f(2,"年代")}<label>小測驗（題目｜答案）<textarea ${a} data-f="5" style="min-height:50px">${esc(s[5])}</textarea></label><div class="cw" data-w="${s[6]}">${cvIn(s)}</div><button class="btn del" ${a}>刪除此小節</button></div></details>`}
  const q=(s[5]||"").split("｜");
  return `<details class="${S.d[id]?"done":""}"><summary><span class="no">${esc(id)}</span><span class="nm">${esc(s[1])}</span><span class="ck">✓</span></summary><div class="body"><span class="era">${esc(s[2])}</span>${cvH(s,false)}${s[5]?`<details class="q"><summary>小測驗</summary><div>${esc(q[0])}<br><button class="btn ans">顯示答案</button><div class="av" hidden><b>答案：</b>${esc(q[1]||"")}</div></div></details>`:""}<label>備註</label><textarea data-n="${esc(id)}" placeholder="寫下自己的筆記…">${esc(S.n[id]||"")}</textarea><button class="btn dn" data-id="${esc(id)}">${S.d[id]?"已學會 ✓":"標記為已學會"}</button></div></details>`}
 function render(){
- let h=`<div class="intro"><p><b>藝術史是什麼？</b>藝術史研究人類如何用圖像、建築與物件表達信仰、權力與感受，並理解它們為何在某個時代以那樣的面貌出現。</p><p><b>年代標示：</b>B.C.（Before Christ）是公元前，數字越大越早，如 25000 B.C.；AD（anno domini）是公元後，如 2026 AD。</p><p><b>大脈絡：</b>史前與古代（史前、古埃及、蘇美、古希臘、古羅馬）→ 中世紀（早期基督教、拜占庭、哥德式）→ 文藝復興（初期、盛期、晚期、矯飾主義）→ 巴洛克 → 洛可可 → 新古典，之後進入十九、二十世紀。</p></div>`;
- D.forEach((c,ci)=>{if(cur>=0&&cur!==ci)return;
-  h+=`<h2>${esc(c[0])}</h2><div class="sub">${esc(c[1])}</div>`+c[2].map((s,si)=>card(s,ci,si)).join("")+(edit?`<button class="btn" data-add="${ci}">＋新增小節</button>`:"")});
+ let h=`<div class="intro"><p><b>年代標示：</b>B.C.（Before Christ）是公元前，數字越大越早，如 25000 B.C.；AD（anno domini）是公元後，如 2026 AD。</p><p><b>大脈絡：</b>史前與古代（史前、古埃及、蘇美、古希臘、古羅馬）→ 中世紀（早期基督教、拜占庭、哥德式）→ 文藝復興（初期、盛期、晚期、矯飾主義）→ 巴洛克 → 洛可可 → 新古典，之後進入十九、二十世紀。</p></div>`;
+ const c=D[cur]||D[0],ci=D.indexOf(c);
+ h+=`<h2>${esc(c[0])}</h2><div class="sub">${esc(c[1])}</div>`+c[2].map((s,si)=>card(s,ci,si)).join("")+(edit?`<button class="btn" data-add="${ci}">＋新增小節</button>`:"");
  $("main").innerHTML=h;prog();nav()}
+function ex(cmd,val,css){if(!edTx)return flash("請先雙擊文字方塊進入編輯，並選取要修改的文字");
+ edTx.focus();if(sv){const g=getSelection();g.removeAllRanges();g.addRange(sv)}
+ document.execCommand("styleWithCSS",false,css!==false);document.execCommand(cmd,false,val);
+ edTx.querySelectorAll("font[size]").forEach(f=>{const s=document.createElement("span");s.style.fontSize=pxv+"px";s.append(...f.childNodes);f.replaceWith(s)});upd()}
+function upd(){const b=edTx.closest(".bk"),u=b.parentNode.dataset.u;L[u].b[+b.dataset.i].h=clean(edTx.innerHTML);saveL(u)}
+document.addEventListener("mousedown",e=>{if(e.target.closest(".rt button"))e.preventDefault()});
+document.addEventListener("selectionchange",()=>{if(!edTx)return;const g=getSelection();if(g.rangeCount&&edTx.contains(g.anchorNode))sv=g.getRangeAt(0).cloneRange()});
+document.addEventListener("dblclick",e=>{const b=e.target.closest(".cv.ed .bk");if(!b)return;const u=b.parentNode.dataset.u,m=L[u]&&L[u].b[+b.dataset.i];if(!m||m.t!=="text")return;
+ const x=b.querySelector(".tx");edTx=x;x.contentEditable="true";x.focus();sv=null});
+document.addEventListener("focusout",e=>{const x=e.target;if(x!==edTx)return;const r=e.relatedTarget;if(r&&r.closest&&r.closest(".rt"))return;x.contentEditable="false";edTx=null});
 document.addEventListener("click",e=>{const g=x=>e.target.closest(x);let b;
- if(b=g("nav button")){cur=+b.dataset.i;render();scrollTo(0,0)}
+ if(b=g("nav button")){cur=+b.dataset.i;sel=null;render();scrollTo(0,0)}
  else if(b=g(".dn")){const id=b.dataset.id;S.d[id]=!S.d[id];svS();b.closest("details").classList.toggle("done",!!S.d[id]);b.textContent=S.d[id]?"已學會 ✓":"標記為已學會";prog()}
  else if(b=g(".ans")){const v=b.nextElementSibling;v.hidden=!v.hidden;b.textContent=v.hidden?"顯示答案":"隱藏答案"}
- else if(b=g("[data-add]")){D[+b.dataset.add][2].push(["新-"+Math.floor(Math.random()*900+100),"新小節","","（在此輸入內容）","","","n"+Math.random().toString(36).slice(2,8)]);saveD();render()}
- else if(b=g(".del")){if(b.dataset.ok){const s=D[+b.dataset.c][2].splice(+b.dataset.s,1)[0];if(db&&s)db.doc("layout/"+s[6]).delete().catch(()=>{});delete L[s&&s[6]];saveD();render()}else{b.dataset.ok=1;b.textContent="再按一次確認刪除"}}
+ else if(b=g("[data-add]")){D[+b.dataset.add][2].push(["新-"+Math.floor(Math.random()*900+100),"新小節","","（在此輸入內容）","","","n"+Math.random().toString(36).slice(2,8)]);save();render()}
+ else if(b=g(".del")){if(b.dataset.ok){const s=D[+b.dataset.c][2].splice(+b.dataset.s,1)[0];if(s)delete L[s[6]];save();render()}else{b.dataset.ok=1;b.textContent="再按一次確認刪除"}}
+ else if(b=g(".rt button")){const d=b.dataset;
+  if(d.cmd)ex(d.cmd);else if(d.fc||d.hc){if(edTx){d.fc?ex("foreColor",d.fc):ex("hiliteColor",d.hc)}else if(d.fc&&sel){const m=L[sel.u].b[sel.i];m.c=d.fc;save();refresh(sel.u)}else flash("請先雙擊文字方塊進入編輯，並選取文字")}}
  else if(b=g("button[data-a]")){const d=b.dataset,s=sec(d.u);if(!s)return;const l=L[d.u]=lay(s);
   if(d.a==="addt"){l.b.push({t:"text",x:5,y:10,w:40,s:15,tx:"新文字"});sel={u:d.u,i:l.b.length-1}}
   else if(d.a==="h")l.h=Math.max(120,l.h+ +d.d);
   else if(d.a==="rm"&&sel){l.b.splice(sel.i,1);sel=null}
   else if(d.a==="top"&&sel){const m=l.b.splice(sel.i,1)[0];l.b.push(m);sel.i=l.b.length-1}
-  saveL(d.u);refresh(d.u)}});
+  save();refresh(d.u)}});
 document.addEventListener("input",e=>{const t=e.target,d=t.dataset;
- if(d.f!=null){D[+d.c][2][+d.s][+d.f]=t.value;saveD()}
+ if(t===edTx)return upd();
+ if(d.f!=null){D[+d.c][2][+d.s][+d.f]=t.value;save()}
  else if(d.n){S.n[d.n]=t.value;svS()}
- else if(d.bt&&sel){L[d.bt].b[sel.i].tx=t.value;const x=document.querySelector(`.cv[data-u="${d.bt}"] .bk[data-i="${sel.i}"] .tx`);if(x)x.innerHTML=ptxt(t.value);saveL(d.bt)}
- else if(d.cap&&sel){L[d.cap].b[sel.i].cap=t.value;saveL(d.cap)}});
-document.addEventListener("change",async e=>{const t=e.target,d=t.dataset;
- if(d.bs&&sel){L[d.bs].b[sel.i].s=+t.value;saveL(d.bs);const x=document.querySelector(`.cv[data-u="${d.bs}"] .bk[data-i="${sel.i}"] .tx`);if(x)x.style.fontSize=t.value+"px";return}
- const u=d.up;if(!u)return;const s=sec(u);if(!as){msg(u,"目前無法上傳圖片（需要編輯權限）");return}
- const l=L[u]=lay(s);let bad="";
- for(const f of t.files){try{const r=await as.upload(f);l.b.push({t:"img",id:r.id,x:5+l.b.length*3,y:10+l.b.length*12,w:40,cap:""});sel={u,i:l.b.length-1}}catch(x){bad="上傳失敗："+((x&&(x.message||x.code))||"未知錯誤")}}
- saveL(u);refresh(u);if(bad)msg(u,bad)});
-document.addEventListener("pointerdown",e=>{const el=e.target.closest(".cv.ed .bk");if(!el||innerWidth<=640)return;
+ else if(d.cap&&sel){L[d.cap].b[sel.i].cap=t.value;save()}});
+document.addEventListener("change",e=>{const t=e.target,d=t.dataset;
+ if(d.bs&&sel){L[d.bs].b[sel.i].s=+t.value;save();const x=document.querySelector(`.cv[data-u="${d.bs}"] .bk[data-i="${sel.i}"] .tx`);if(x)x.style.fontSize=t.value+"px";return}
+ if(d.fs!=null){if(t.value){pxv=+t.value;ex("fontSize","7",false)}t.value="";return}
+ if(d.col!=null){edTx?ex("foreColor",t.value):flash("請先雙擊文字方塊進入編輯，並選取文字");return}
+ const u=d.up;if(!u)return;const l=L[u]=lay(sec(u));
+ [...t.files].forEach(f=>{const im=new Image();im.onload=()=>{const k=Math.min(1,1400/Math.max(im.width,im.height)),cn=document.createElement("canvas");cn.width=im.width*k;cn.height=im.height*k;const x=cn.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,cn.width,cn.height);x.drawImage(im,0,0,cn.width,cn.height);
+  l.b.push({t:"img",src:cn.toDataURL("image/jpeg",.85),x:5+l.b.length*3,y:10+l.b.length*12,w:40,cap:""});sel={u,i:l.b.length-1};save();refresh(u)};im.onerror=()=>msg(u,"無法讀取這張圖片");im.src=URL.createObjectURL(f)})});
+document.addEventListener("pointerdown",e=>{const el=e.target.closest(".cv.ed .bk");if(!el||e.target.closest("[contenteditable=true]"))return;
  const cv=el.parentNode,u=cv.dataset.u,l=L[u]=lay(sec(u)),i=+el.dataset.i,m=l.b[i],prev=sel,was=!!sel&&sel.u===u&&sel.i===i;
  sel={u,i};cv.querySelectorAll(".bk").forEach(x=>x.classList.toggle("sel",x===el));
  drag={el,cv,u,m,rz:!!e.target.closest(".rz"),sx:e.clientX,sy:e.clientY,x:m.x,y:m.y,w:m.w,was,prev,mv:false};el.setPointerCapture(e.pointerId);e.preventDefault()});
 document.addEventListener("pointermove",e=>{if(!drag)return;const r=drag.cv.getBoundingClientRect(),dx=(e.clientX-drag.sx)/r.width*100,dy=e.clientY-drag.sy,m=drag.m;drag.mv=true;
  if(drag.rz){m.w=Math.max(8,Math.min(100,drag.w+dx));drag.el.style.width=m.w+"%"}
  else{m.x=Math.max(-10,Math.min(95,drag.x+dx));m.y=Math.round(Math.max(-20,drag.y+dy));drag.el.style.left=m.x+"%";drag.el.style.top=m.y+"px"}});
-document.addEventListener("pointerup",()=>{if(!drag)return;const d=drag;drag=null;if(d.mv)saveL(d.u);if(!d.was)refresh(d.u);if(d.prev&&d.prev.u!==d.u)refresh(d.prev.u)});
-$("eb").onclick=function(){edit=!edit;sel=null;this.classList.toggle("on",edit);this.textContent=edit?"✓ 完成編輯":"✎ 編輯模式";render()};
+document.addEventListener("pointerup",()=>{if(!drag)return;const d=drag;drag=null;if(d.mv)save();if(!d.was)refresh(d.u);if(d.prev&&d.prev.u!==d.u)refresh(d.prev.u)});
+$("eb").onclick=function(){edit=!edit;sel=null;edTx=null;this.classList.toggle("on",edit);this.textContent=edit?"✓ 完成編輯":"✎ 編輯模式";render()};
+$("ex").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify({v:1,D,L})],{type:"application/json"}));a.download="content.json";a.click()};
+$("imp").onchange=e=>{const f=e.target.files[0];if(!f)return;f.text().then(t=>{const x=JSON.parse(t);if(!x.D)throw 0;D=x.D;L=x.L||{};fix();save();render();flash("已匯入")}).catch(()=>flash("匯入失敗：檔案格式不正確"))};
+$("rs").onclick=function(){if(rc){idb("del").catch(()=>{}).then(()=>location.reload())}else{rc=1;this.textContent="再按一次確認（本機修改會消失）"}};
 render();
-(async()=>{try{const u=await claude.use("user");canEd=u?await u.canEdit():false}catch(e){}
- try{db=await claude.use("db")}catch(e){}try{as=await claude.use("assets")}catch(e){}
- if(db){try{const r=await db.doc("content/main").get();if(r.exists&&r.data().j){D=JSON.parse(r.data().j);fix()}ld=true}catch(e){}
-  try{const q=await db.collection("layout").get();q.docs.forEach(x=>{try{L[x.id]=JSON.parse(x.data().j)}catch(e){}})}catch(e){}}
- $("eb").style.display=canEd&&db&&ld?"":"none";if(!edit)render()})();
+(async()=>{let st=null;
+ if(EDIT){try{st=await idb("get")}catch(e){}$("tools").style.display="flex";if(st)$("tm").textContent="已載入本機草稿（尚未發佈）"}
+ if(!st){try{const r=await fetch("content.json",{cache:"no-cache"});if(r.ok)st=await r.json()}catch(e){}}
+ if(st&&st.D){D=st.D;L=st.L||{};fix()}
+ render()})();
 </script></body></html>
